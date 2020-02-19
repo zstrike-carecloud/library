@@ -14,4 +14,18 @@ connection.connect((err) => {
     console.log('Connection established');
 });
 
+export const initTable = () => {
+    connection.query(`CREATE TABLE IF NOT EXISTS \`books\` (
+        \`id\` int NOT NULL AUTO_INCREMENT,
+        \`title\` varchar(50) DEFAULT NULL,
+        \`author\` varchar(50) DEFAULT NULL,
+        \`isbn\` varchar(13) DEFAULT NULL,
+        \`description\` text,
+        \`status\` int DEFAULT NULL,
+        \`image\` mediumtext,
+        \`borrower\` varchar(50) DEFAULT NULL,
+        PRIMARY KEY (\`id\`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8`);
+}
+
 export default connection;
