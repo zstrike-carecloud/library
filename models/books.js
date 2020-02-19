@@ -19,7 +19,7 @@ export class Books {
         console.log(rows);
         resolve(rows);
       });
-    }).then(value => value);
+    }).then(value => value).catch(err => err);
   }
 
   findAll() {

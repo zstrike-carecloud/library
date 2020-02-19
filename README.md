@@ -38,3 +38,10 @@ export BOOKS_CONNECTION_DB='library'
 ## You're almost there!
 
 5. Run `npm start` and the server should start!
+
+
+TODO List:
+
+Set up seed data
+Finish validators
+Add descriptive error messages to validators

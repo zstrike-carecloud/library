@@ -19,7 +19,7 @@ export const initTable = () => {
         \`id\` int NOT NULL AUTO_INCREMENT,
         \`title\` varchar(50) DEFAULT NULL,
         \`author\` varchar(50) DEFAULT NULL,
-        \`isbn\` varchar(13) DEFAULT NULL,
+        \`isbn\` varchar(17) DEFAULT NULL,
         \`description\` text,
         \`status\` int DEFAULT NULL,
         \`image\` mediumtext,
