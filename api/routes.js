@@ -1,7 +1,4 @@
-// import { Router, Request, Response } from 'express';
-// import middlewares from '../middlewares';
-// import { Books } from '../models/books';
-// const route = Router();
+const { check, validationResult, body } = require('express-validator');
 
 const Books = require('../models/books').Books;
 
@@ -11,12 +8,23 @@ export default (app) => {
     return res.json({ books: await new Books(db).findAll() }).status(200);
   });
 
-  app.get('/books/:id', async (req, res) => {
+  app.get('/books/:id', [
+    check('id').isInt(),
+  ], async (req, res) => {
     const db = req.app.get('db');
     return res.json({ books: await new Books(db).findById({ id: req.params.id }) }).status(200);
   });
 
-  app.post('/books/new', async (req, res) => {
+  app.post('/books/new', [
+    body(['book.title']).isString(),
+    body(['book.author']).optional().isString(),
+    body(['book.isbn']).optional().isISBN(),
+    body(['book.image']).optional().isDataURI(),
+  ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
     const db = req.app.get('db');
     const { book } = req.body;
     return res.json({ books: await new Books(db).add({ book }) }).status(200);
@@ -32,11 +40,16 @@ export default (app) => {
     const db = req.app.get('db');
     const { id } = req.params;
     const { book: { borrower } } = req.body;
-    console.log('BORROWER', borrower, req.body);
     return res.json({ books: await new Books(db).edit({ id, book: { status, borrower: borrower ? borrower : null } }) }).status(200);
   }
 
-  app.put('/books/:id/checkin', async (req, res) => {
+  app.put('/books/:id/checkin', [
+    check('id').isInt()
+  ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
     return checkInOut(req, res, 1);
   });
 
@@ -47,7 +60,6 @@ export default (app) => {
   app.delete('/books/:id', async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
-    console.log('ID', id);
     return res.json({ books: await new Books(db).delete({ id }) }).status(200);
   });
 };
