@@ -2,6 +2,8 @@ const { check, validationResult, body } = require('express-validator');
 
 const Books = require('../models/books').Books;
 
+// TODO: Finish input validators and add descriptive messages
+// TODO: Extract repeated validator error logic
 export default (app) => {
   app.get('/books', async (req, res) => {
     const db = req.app.get('db');

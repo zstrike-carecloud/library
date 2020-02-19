@@ -1,10 +1,10 @@
 import mysql from 'mysql';
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'library',
+    host: process.env.BOOKS_CONNECTION_HOST,
+    user: process.env.BOOKS_CONNECTION_USER,
+    password: process.env.BOOKS_CONNECTION_PASSWORD,
+    database: process.env.BOOKS_CONNECTION_DB,
 });
 connection.connect((err) => {
     if (err) {

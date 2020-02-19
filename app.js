@@ -5,7 +5,7 @@ import cors from 'cors';
 import { db, initTable } from './db';
 
 const app = express();
-const port = 3000;
+const port = process.env.BOOKS_PORT;
 
 app.use(cors());
 
