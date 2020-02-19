@@ -1,4 +1,4 @@
-import routes from './api/routes';
+import routes from './routes/routes';
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
