@@ -21,7 +21,7 @@ export const initTable = () => {
         \`author\` varchar(50) DEFAULT NULL,
         \`isbn\` varchar(17) DEFAULT NULL,
         \`description\` text,
-        \`status\` int DEFAULT NULL,
+        \`status\` int DEFAULT 0,
         \`image\` mediumtext,
         \`borrower\` varchar(50) DEFAULT NULL,
         PRIMARY KEY (\`id\`)
